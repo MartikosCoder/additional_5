@@ -16,8 +16,12 @@ module.exports = function check(str, bracketsConfig) {
             if (str[i] === '(' || str[i] === '{' || str[i] === '[') {
                 stack.push(str[i]);
             } else if (str[i] === '|'){
-                if(stack.indexOf(str[i]) !== stack.length - 1){
+                if(stack.indexOf(str[i]) === -1){
                     stack.push(str[i]);
+                } else {
+                    let last = stack.pop();
+
+                    if (str[i] !== map[last]) {return false};
                 }
             }
         //  If that character is a closing brace, pop from the stack, which will also reduce the length of the stack each time a closing bracket is encountered.
