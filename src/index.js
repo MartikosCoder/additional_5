@@ -7,15 +7,36 @@ module.exports = function check(str, bracketsConfig) {
             '(': ')',
             '[': ']',
             '{': '}',
-            '|': '|'
+            '|': '|',
+            '1': '2',
+            '3': '4',
+            '5': '6',
+            '7': '7',
+            '8': '8'
         }
 
         for (let i = 0; i < str.length; i++) {
 
         // If character is an opening brace add it to a stack
-            if (str[i] === '(' || str[i] === '{' || str[i] === '[') {
+            if (str[i] === '(' || str[i] === '{' || str[i] === '[' || str[i] === '1' || str[i] === '3' || str[i] === '5') {
                 stack.push(str[i]);
             } else if (str[i] === '|'){
+                if(stack.indexOf(str[i]) === -1){
+                    stack.push(str[i]);
+                } else {
+                    let last = stack.pop();
+
+                    if (str[i] !== map[last]) {return false};
+                }
+            } else if (str[i] === '7'){
+                if(stack.indexOf(str[i]) === -1){
+                    stack.push(str[i]);
+                } else {
+                    let last = stack.pop();
+
+                    if (str[i] !== map[last]) {return false};
+                }
+            } else if (str[i] === '8'){
                 if(stack.indexOf(str[i]) === -1){
                     stack.push(str[i]);
                 } else {
